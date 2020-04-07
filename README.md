@@ -15,78 +15,58 @@ npm install --save react-native-ios-header
 
 ## Demo
 
-![iOS](https://raw.githubusercontent.com/maphongba008/react-native-animated-header/master/demo/ios-gif.gif)
+![demo](/ios-header.gif)
 
 ## Usage
 
 ```javascript
 import React, { Component } from 'react';
-import { Text, View, ScrollView } from 'react-native';
-import { Icon } from 'native-base';
-import AnimatedHeader from 'react-native-animated-header';
-import Bg from './assets/bg.jpg';
-
-getListItems = count => {
-  const items = [];
-  let i = 0;
-
-  while (i < count) {
-    i++;
-    items.push(
-      <View key={i} style={{ backgroundColor: i % 2 === 0 ? '#eee5ff' : '#ceebfd', height: 64 }}>
-        <Text style={{ color: '#999' }}>{`List Item ${i}`}</Text>
-      </View>
-    );
-  }
-
-  return items;
-};
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity
+} from 'react-native';
+import IosHeader from 'react-native-ios-header';
 
 export default class App extends Component {
 
   render() {
+    const addIcon = (
+      <TouchableOpacity>
+       <Text style={{color:'#000', fontSize:32,alignSelf:"flex-end"}}>+</Text>
+      </TouchableOpacity>
+    )
     return (
-      <AnimatedHeader 
-        style={{flex: 1 }}
-        backText='Back'
-        title='Happy coding'
-        renderLeft={() => (<Icon name='arrow-back' style={{ marginLeft: 20 }} />)}
-        renderRight={() => (<Icon name='add' style={{ marginRight: 20 }} />)}
-        backStyle={{ marginLeft: 10 }}
-        backTextStyle={{fontSize: 14, color: '#000'}}
-        titleStyle={{ fontSize: 22, left: 20, bottom: 20, color: '#000' }}
-        headerMaxHeight={200}
-        imageSource={Bg}
-        toolbarColor='#FFF'
-        disabled={false}
-      >
-        <ScrollView>
-          {getListItems(20)}
-        </ScrollView>
-      </AnimatedHeader>
+      <View style={styles.container}>
+        <IosHeader title='Favorite' content={timeLine} topRightItem={addIcon}/>
+      </View>
     );
   }
-  }
+}
 
 ```
 
-## Properties
+## Props
 
-name | description | type | isOptional | default
-:---- |:----------- | :----| ---- | :-------
-backText  | Back text, leave it empty to hide |   String | Yes | `undefined`
-title    | Header title  |   String | Yes | `undefined`
-renderLeft | To render icon on the left | Function | Yes | `undefined`
-renderRight | To render icon on the right | Function | Yes | `undefined`
-backStyle | Style of back container | Object | Yes | { marginLeft: 10 }
-backTextStyle | Style of back text | Object | Yes | { fontSize: 16 }
-titleStyle | Style of title, use `left` and `bottom` for positioning the text | Object | Yes | { fontSize: 20, left: 40, bottom: 30 }
-toolbarColor | Toolbar background color | String | Yes | `#FFF`
-headerMaxHeight | Height of header when expanded | Number | Yes | `200`
-disabled | Do not allow header to collapse | Boolean | Yes | `false`
-noBorder | Hide header separator | Boolean | Yes | `false`
-imageSource | Image background for header | Image | Yes | `undefined`
-parallax | Use parallax effect | Boolean | Yes | `false`
+| Prop                                | Type     | Default   | description |
+| ----------------------------------- | -------- | ----------| ----------- |
+| title                               | string   | `Title`   | Custom header title for both place |
+| content                             | function | None      | Custom body content |
+| headerBgColor                       | string   | `#fff`    | Custom header background color |
+| inputColor                          | string   | `#7d7d7d` | Search text input color |
+| inputBgColor                        | string   | `#dcdce1` | Search text input background color |
+| placeholderColor                    | string   | `#dcdce1` | Text input placeholder color |
+| iconColor                           | string   | `#7d7d7d` | SearchHeader component icon button color |
+| topOffset                           | number   | 50 / 20   | The offset above the header. Default to 50 (ios Iphone X and Above) else 20 |
+| placeholder                         | string   | `Search`  | A string placeholder when there is no text in text input |
+| topLeftItem                         | function | None      | Component for top left side |
+| topRightItem                        | function | None      | Component for top right side |
+| botRightItem                        | function | None      | Right side component beside Large Title |
+| onClear                             | function | None      | This function is called when text input is cleared |
+| onSearch                            | function | None      | This function is called after return/done key is pressed. Return text input event |
+| onEnteringSearch                    | function | None      | This function is called after text is entered/changed in text input. Return text input event |
+| onFocus                             | function | None      | This function is called when text input in focused |
 
 
 ## Copyright and License
