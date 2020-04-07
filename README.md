@@ -37,6 +37,11 @@ export default class App extends Component {
        <Text style={{color:'#000', fontSize:32,alignSelf:"flex-end"}}>+</Text>
       </TouchableOpacity>
     )
+    const timeLine = (
+      <View>
+        //Your Body Content Here
+      </View>
+    )
     return (
       <View style={styles.container}>
         <IosHeader title='Favorite' content={timeLine} topRightItem={addIcon}/>
